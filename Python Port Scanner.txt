@@ -1,0 +1,76 @@
+﻿import socket
+import concurrent.futures
+import argparse
+
+
+def scan_port(host, port, timeout=1):
+    """Scan a single port on the host."""
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.settimeout(timeout)
+            result = s.connect_ex((host, port))
+            if result == 0:
+                return port, True
+            else:
+                return port, False
+    except Exception as e:
+        return port, False
+
+
+def scan_ports(host, ports, max_workers=100):
+    open_ports = []
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+        future_to_port = {executor.submit(scan_port, host, port): port for port in ports}
+        for future in concurrent.futures.as_completed(future_to_port):
+            port, is_open = future.result()
+            if is_open:
+                open_ports.append(port)
+    return open_ports
+
+
+def parse_ports(port_str):
+    """Parse ports string (e.g., '22,80,443' or '1-1024')."""
+    ports = set()
+    parts = port_str.split(",")
+    for part in parts:
+        if "-" in part:
+            start, end = part.split("-")
+            ports.update(range(int(start), int(end) + 1))
+        else:
+            ports.add(int(part))
+    return sorted(ports)
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Simple Python Port Scanner")
+    parser.add_argument("host", help="Target host (IP or domain)")
+    parser.add_argument(
+        "-p", "--ports", default="1-1024", help="Ports to scan (e.g., '22,80,443' or '1-1024')"
+    )
+    parser.add_argument(
+        "-t", "--threads", type=int, default=100, help="Number of concurrent threads (default: 100)"
+    )
+    args = parser.parse_args()
+
+
+    host = args.host
+    ports = parse_ports(args.ports)
+    print(f"Scanning {host} on ports: {args.ports}")
+    print(f"Using {args.threads} threads...")
+
+
+    try:
+        open_ports = scan_ports(host, ports, max_workers=args.threads)
+        print(f"\nScan complete. Open ports on {host}:")
+        for port in open_ports:
+            print(f"  Port {port} is OPEN")
+        if not open_ports:
+            print("  No open ports found.")
+    except KeyboardInterrupt:
+        print("\nScan aborted by user.")
+    except Exception as e:
+        print(f"Error: {e}")
+
+
+if __name__ == "__main__":
+    main()
