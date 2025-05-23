@@ -1,0 +1,43 @@
+﻿use 5.32.0;
+use warnings;
+
+
+# Replaces the path to the file on my computer
+my $log_file = "apache_access.log";
+
+
+# Opens the file and dies if it fails
+open(my $fh, "<", $log_file) or die "File $log_file could not be found: $!";
+
+
+my %count;
+
+
+# Reads the file line by line
+while (my $line = <$fh>) {
+    # Splits the line into fields
+    my @fields = split /\s+/, $line;
+
+
+    # Extracts the IP address from the fields
+    my $ip_address = $fields[0];
+
+
+    # Checks if the IP addresses match any of the target addresses
+    foreach my $target ('127.0.0.1', '127.0.0.11', '217.0.22.3', '139.12.0.2') {
+        if ($ip_address eq $target) {
+            $count{$target}++;
+        }
+    }
+}
+
+
+# Closes the file handle
+close($fh);
+
+
+# Prints the results
+foreach my $target (keys %count) {
+    say "$target appeared $count{$target} times";
+}
+# 127.0.0.1(7), 139.12.0.2(2), 127.0.0.11(1), 217.0.22.3(6)
