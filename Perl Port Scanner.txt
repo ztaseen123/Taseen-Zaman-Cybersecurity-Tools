@@ -1,0 +1,140 @@
+﻿#!/usr/bin/perl
+
+
+use strict;
+use warnings;
+use IO::Socket::INET;
+use threads;
+use Thread::Queue;
+use Getopt::Long qw(:config no_ignore_case);
+use Pod::Usage;
+
+
+# --- Command line options ---
+my $host;
+my $port_str = "1-1024";
+my $threads = 100;
+my $help;
+
+
+GetOptions(
+    "host|h=s"    => \$host,
+    "ports|p=s"   => \$port_str,
+    "threads|t=i" => \$threads,
+    "help"        => \$help,
+) or pod2usage(2);
+
+
+pod2usage(1) if $help || !$host;
+
+
+# --- Parse ports ---
+sub parse_ports {
+    my $str = shift;
+    my %ports;
+    foreach my $part (split /,/, $str) {
+        if ($part =~ /^(\d+)-(\d+)$/) {
+            $ports{$_} = 1 for $1 .. $2;
+        } elsif ($part =~ /^(\d+)$/) {
+            $ports{$1} = 1;
+        }
+    }
+    return sort { $a <=> $b } keys %ports;
+}
+
+
+my @ports = parse_ports($port_str);
+
+
+# --- Scan a single port ---
+sub scan_port {
+    my ($host, $port, $timeout) = @_;
+    my $sock = IO::Socket::INET->new(
+        PeerAddr => $host,
+        PeerPort => $port,
+        Proto    => 'tcp',
+        Timeout  => $timeout,
+    );
+    if ($sock) {
+        close($sock);
+        return ($port, 1);
+    }
+    return ($port, 0);
+}
+
+
+# --- Scan all ports with thread pool ---
+sub scan_ports {
+    my ($host, $ports_ref, $max_threads) = @_;
+    my $queue = Thread::Queue->new(@$ports_ref);
+    my @open_ports;
+    my @workers;
+
+
+    for (1 .. $max_threads) {
+        push @workers, threads->create(sub {
+            while (defined(my $port = $queue->dequeue_nb)) {
+                my ($p, $is_open) = scan_port($host, $port, 1);
+                if ($is_open) {
+                    lock(@open_ports);
+                    push @open_ports, $p;
+                }
+            }
+        });
+    }
+
+
+    $_->join for @workers;
+    return sort { $a <=> $b } @open_ports;
+}
+
+
+# --- Main ---
+print "Scanning $host on ports: $port_str\n";
+print "Using $threads threads...\n";
+
+
+eval {
+    my @open_ports = scan_ports($host, \@ports, $threads);
+    print "\nScan complete. Open ports on $host:\n";
+    if (@open_ports) {
+        print "  Port $_ is OPEN\n" for @open_ports;
+    } else {
+        print "  No open ports found.\n";
+    }
+    1;
+} or do {
+    print "Error: $@\n";
+};
+
+
+__END__
+
+
+=head1 NAME
+
+
+port_scanner.pl - Perl Port Scanner
+
+
+=head1 SYNOPSIS
+
+
+perl port_scanner.pl --host <host> [--ports <ports>] [--threads <threads>]
+
+
+ Options:
+   --host,   -h  Target host (required)
+   --ports,  -p  Ports to scan, e.g. '22,80,443' or '1-1024' (default: 1-1024)
+   --threads,-t  Number of concurrent threads (default: 100)
+   --help        Show this help
+
+
+=head1 EXAMPLES
+
+
+perl port_scanner.pl --host scanme.nmap.org
+perl port_scanner.pl --host 192.168.1.1 --ports 22,80,443 --threads 50
+
+
+=cut
