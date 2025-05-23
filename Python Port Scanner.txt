@@ -1,76 +1,119 @@
-﻿import socket
-import concurrent.futures
-import argparse
+#!/usr/bin/perl
 
+use strict;
+use warnings;
+use IO::Socket::INET;
+use threads;
+use Thread::Queue;
+use Getopt::Long qw(:config no_ignore_case);
+use Pod::Usage;
 
-def scan_port(host, port, timeout=1):
-    """Scan a single port on the host."""
-    try:
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.settimeout(timeout)
-            result = s.connect_ex((host, port))
-            if result == 0:
-                return port, True
-            else:
-                return port, False
-    except Exception as e:
-        return port, False
+# --- Command line options ---
+my $host;
+my $port_str = "1-1024";
+my $threads = 100;
+my $help;
 
+GetOptions(
+    "host|h=s"    => \$host,
+    "ports|p=s"   => \$port_str,
+    "threads|t=i" => \$threads,
+    "help"        => \$help,
+) or pod2usage(2);
 
-def scan_ports(host, ports, max_workers=100):
-    open_ports = []
-    with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
-        future_to_port = {executor.submit(scan_port, host, port): port for port in ports}
-        for future in concurrent.futures.as_completed(future_to_port):
-            port, is_open = future.result()
-            if is_open:
-                open_ports.append(port)
-    return open_ports
+pod2usage(1) if $help || !$host;
 
+# --- Parse ports ---
+sub parse_ports {
+    my $str = shift;
+    my %ports;
+    foreach my $part (split /,/, $str) {
+        if ($part =~ /^(\d+)-(\d+)$/) {
+            $ports{$_} = 1 for $1 .. $2;
+        } elsif ($part =~ /^(\d+)$/) {
+            $ports{$1} = 1;
+        }
+    }
+    return sort { $a <=> $b } keys %ports;
+}
 
-def parse_ports(port_str):
-    """Parse ports string (e.g., '22,80,443' or '1-1024')."""
-    ports = set()
-    parts = port_str.split(",")
-    for part in parts:
-        if "-" in part:
-            start, end = part.split("-")
-            ports.update(range(int(start), int(end) + 1))
-        else:
-            ports.add(int(part))
-    return sorted(ports)
+my @ports = parse_ports($port_str);
 
+# --- Scan a single port ---
+sub scan_port {
+    my ($host, $port, $timeout) = @_;
+    my $sock = IO::Socket::INET->new(
+        PeerAddr => $host,
+        PeerPort => $port,
+        Proto    => 'tcp',
+        Timeout  => $timeout,
+    );
+    if ($sock) {
+        close($sock);
+        return ($port, 1);
+    }
+    return ($port, 0);
+}
 
-def main():
-    parser = argparse.ArgumentParser(description="Simple Python Port Scanner")
-    parser.add_argument("host", help="Target host (IP or domain)")
-    parser.add_argument(
-        "-p", "--ports", default="1-1024", help="Ports to scan (e.g., '22,80,443' or '1-1024')"
-    )
-    parser.add_argument(
-        "-t", "--threads", type=int, default=100, help="Number of concurrent threads (default: 100)"
-    )
-    args = parser.parse_args()
+# --- Scan all ports with thread pool ---
+sub scan_ports {
+    my ($host, $ports_ref, $max_threads) = @_;
+    my $queue = Thread::Queue->new(@$ports_ref);
+    my @open_ports;
+    my @workers;
 
+    for (1 .. $max_threads) {
+        push @workers, threads->create(sub {
+            while (defined(my $port = $queue->dequeue_nb)) {
+                my ($p, $is_open) = scan_port($host, $port, 1);
+                if ($is_open) {
+                    lock(@open_ports);
+                    push @open_ports, $p;
+                }
+            }
+        });
+    }
 
-    host = args.host
-    ports = parse_ports(args.ports)
-    print(f"Scanning {host} on ports: {args.ports}")
-    print(f"Using {args.threads} threads...")
+    $_->join for @workers;
+    return sort { $a <=> $b } @open_ports;
+}
 
+# --- Main ---
+print "Scanning $host on ports: $port_str\n";
+print "Using $threads threads...\n";
 
-    try:
-        open_ports = scan_ports(host, ports, max_workers=args.threads)
-        print(f"\nScan complete. Open ports on {host}:")
-        for port in open_ports:
-            print(f"  Port {port} is OPEN")
-        if not open_ports:
-            print("  No open ports found.")
-    except KeyboardInterrupt:
-        print("\nScan aborted by user.")
-    except Exception as e:
-        print(f"Error: {e}")
+eval {
+    my @open_ports = scan_ports($host, \@ports, $threads);
+    print "\nScan complete. Open ports on $host:\n";
+    if (@open_ports) {
+        print "  Port $_ is OPEN\n" for @open_ports;
+    } else {
+        print "  No open ports found.\n";
+    }
+    1;
+} or do {
+    print "Error: $@\n";
+};
 
+__END__
 
-if __name__ == "__main__":
-    main()
+=head1 NAME
+
+port_scanner.pl - Perl Port Scanner
+
+=head1 SYNOPSIS
+
+perl port_scanner.pl --host <host> [--ports <ports>] [--threads <threads>]
+
+ Options:
+   --host,   -h  Target host (required)
+   --ports,  -p  Ports to scan, e.g. '22,80,443' or '1-1024' (default: 1-1024)
+   --threads,-t  Number of concurrent threads (default: 100)
+   --help        Show this help
+
+=head1 EXAMPLES
+
+perl port_scanner.pl --host scanme.nmap.org
+perl port_scanner.pl --host 192.168.1.1 --ports 22,80,443 --threads 50
+
+=cut
