@@ -209,7 +209,7 @@ Add-WindowsCapability -Online -Name "Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.
 
 🚀 Quick Start
 Clone the Repository
-bashgit clone https://github.com/ztaseen123/Taseen-Zaman-Cybersecurity-Tools
+bashgit clone (https://github.com/ztaseen123/Taseen-Zaman-Cybersecurity-Tools)
 cd cybersecurity-tools
 File Structure
 cybersecurity-tools/
