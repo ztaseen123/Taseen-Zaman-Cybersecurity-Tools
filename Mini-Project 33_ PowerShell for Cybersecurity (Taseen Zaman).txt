@@ -24,6 +24,6 @@ Get-ADGroupMember "HR" | Where-Object {$_.objectClass -eq "user"} | ForEach-Obje
 8. List only the Security groups
 Get-ADGroup -Filter {GroupCategory -eq "Security"}
 9. Assume you have a “Locations” organizational unit (OU) at the root of your AD, and you have three OUs underneath it: Houston, NYC, and LA. List all AD groups that are only in the “NYC” OU.
-Get-ADGroup -Filter '*' -SearchBase 'OU=Locations,OU=NYC,DC=company,DC=pri'
+Get-ADGroup -Filter '*' -SearchBase 'OU=NYC,OU=Locations,DC=company,DC=pri'
 10. Perform the previous action, but export the results to a CSV file called “nyc.csv.”
-Get-ADGroup -Filter '*' -SearchBase 'OU=Locations,OU=NYC,DC=company,DC=pri'-SearchScope 2 | Export-Csv -Path 'departmental_groups.csv' -NoTypeInformation
+Get-ADGroup -Filter '*' -SearchBase 'OU=NYC,OU=Locations,DC=company,DC=pri' -SearchScope Subtree | Export-Csv -Path 'nyc.csv' -NoTypeInformation
