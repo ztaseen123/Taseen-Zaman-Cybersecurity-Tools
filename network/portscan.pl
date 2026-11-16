@@ -136,3 +136,24 @@ eval {
 };
 
 __END__
+
+=head1 NAME
+
+portscan.pl - threaded TCP connect scanner
+
+=head1 SYNOPSIS
+
+portscan.pl --host <target> [--ports 22,80,8000-8100] [--threads 100]
+
+ Options:
+   -h, --host      host or IP to scan (required)
+   -p, --ports     comma list and/or ranges, default 1-1024
+   -t, --threads   worker threads, default 100
+       --help      this text
+
+=head1 DESCRIPTION
+
+Full connect() scan, so it needs no privileges and it will show up in the
+target's logs. Only point it at things you are allowed to scan.
+
+=cut

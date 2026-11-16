@@ -1,29 +1,43 @@
-﻿1. Find all AD groups without regard for any criteria
+# AD group queries I keep reaching for. Needs the ActiveDirectory module (RSAT).
+# These are one-liners to paste, not a script to run top to bottom.
+# Swap 'HR' and the OU path for whatever you're actually looking at.
+
+# every group in the domain
 Get-ADGroup -Filter *
-2. Check to see if a single AD group called HR exists
+
+# does a group exist
 Get-ADGroup -Identity 'HR'
-3. List all members of the Administrators group
-Get-LocalGroupMember -Identity "Administrators"
-4. List all groups nested inside the HR group
-Get-ADGroupMember -Identity ‘HR’ -Recursive
-5. List all group members of the HR, Accounting, and IT groups using a foreach loop
-$groupNames = 'HR','Accounting','IT'
+
+# local admins on this box (local, not AD)
+Get-LocalGroupMember -Identity 'Administrators'
+
+# members of HR including anything nested inside it
+Get-ADGroupMember -Identity 'HR' -Recursive
+
+# same thing across a few groups
+$groupNames = 'HR', 'Accounting', 'IT'
 foreach ($group in $groupNames) {
-Get-ADGroupMember -Identity $group
+    Get-ADGroupMember -Identity $group
 }
-6. Check to see if a single AD group called HR exists, but have the command prompt you for alternate username/password
+
+# run the lookup as a different account
 Get-ADGroup -Identity 'HR' -Credential (Get-Credential)
-7. List all the group members of the HR group, along with each user account’s email address
-Get-ADGroupMember "HR" | Where-Object {$_.objectClass -eq "user"} | ForEach-Object {
+
+# HR members with their mail attribute
+Get-ADGroupMember 'HR' | Where-Object { $_.objectClass -eq 'user' } | ForEach-Object {
     $user = Get-ADUser $_.SamAccountName -Properties EmailAddress
     [PSCustomObject]@{
-        Name = $user.Name
+        Name  = $user.Name
         Email = $user.EmailAddress
     }
 }
-8. List only the Security groups
-Get-ADGroup -Filter {GroupCategory -eq "Security"}
-9. Assume you have a “Locations” organizational unit (OU) at the root of your AD, and you have three OUs underneath it: Houston, NYC, and LA. List all AD groups that are only in the “NYC” OU.
-Get-ADGroup -Filter '*' -SearchBase 'OU=NYC,OU=Locations,DC=company,DC=pri'
-10. Perform the previous action, but export the results to a CSV file called “nyc.csv.”
-Get-ADGroup -Filter '*' -SearchBase 'OU=NYC,OU=Locations,DC=company,DC=pri' -SearchScope Subtree | Export-Csv -Path 'nyc.csv' -NoTypeInformation
+
+# security groups only (skips distribution lists)
+Get-ADGroup -Filter { GroupCategory -eq 'Security' }
+
+# groups under one OU
+Get-ADGroup -Filter * -SearchBase 'OU=NYC,OU=Locations,DC=company,DC=pri'
+
+# ...and dump them to csv
+Get-ADGroup -Filter * -SearchBase 'OU=NYC,OU=Locations,DC=company,DC=pri' -SearchScope Subtree |
+    Export-Csv -Path 'nyc.csv' -NoTypeInformation

@@ -4,9 +4,10 @@ use strict;
 use warnings;
 use feature 'say';
 
-# Configuration
-my $log_file = "apache_access.log";
-my @target_ips = ('127.0.0.1', '127.0.0.11', '217.0.22.3', '139.12.0.2');
+# usage: apache_ip_hits.pl [access.log] [ip ...]
+# With no args it falls back to the defaults below.
+my $log_file   = shift @ARGV // "apache_access.log";
+my @target_ips = @ARGV ? @ARGV : ('127.0.0.1', '127.0.0.11', '217.0.22.3', '139.12.0.2');
 
 # Create a hash for faster IP lookup
 my %target_lookup = map { $_ => 1 } @target_ips;

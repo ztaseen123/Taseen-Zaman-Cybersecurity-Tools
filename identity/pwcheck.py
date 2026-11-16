@@ -1,5 +1,7 @@
-import re
+#!/usr/bin/env python3
+import getpass
 import math
+import re
 
 # List of common weak passwords (you can expand this)
 COMMON_PASSWORDS = {
@@ -31,56 +33,56 @@ def check_password_strength(password):
     
     # Check if password is in common passwords list
     if password.lower() in COMMON_PASSWORDS:
-        feedback.append("❌ Password is too common.")
+        feedback.append("[-] Password is too common.")
         return score, feedback
     
     # Length checks
     if len(password) < 8:
-        feedback.append("❌ Too short (min 8 chars).")
+        feedback.append("[-] Too short (min 8 chars).")
     elif len(password) < 12:
-        feedback.append("⚠️ Decent length, but 12+ recommended.")
+        feedback.append("[!] Decent length, but 12+ recommended.")
         score += 1
     else:
-        feedback.append("✅ Good length.")
+        feedback.append("[+] Good length.")
         score += 2
     
     # Character checks
     if re.search(r'[a-z]', password):
         score += 1
     else:
-        feedback.append("❌ Add lowercase letters.")
+        feedback.append("[-] Add lowercase letters.")
     
     if re.search(r'[A-Z]', password):
         score += 1
     else:
-        feedback.append("❌ Add uppercase letters.")
+        feedback.append("[-] Add uppercase letters.")
     
     if re.search(r'\d', password):
         score += 1
     else:
-        feedback.append("❌ Add numbers.")
+        feedback.append("[-] Add numbers.")
     
     if re.search(r'[!@#$%^&*(),.?":{}|<>]', password):
         score += 1
     else:
-        feedback.append("❌ Add special characters.")
+        feedback.append("[-] Add special characters.")
     
     # Calculate entropy and provide feedback
     entropy = calculate_entropy(password)
     if entropy < 28:
-        feedback.append("❌ Very weak entropy.")
+        feedback.append("[-] Very weak entropy.")
     elif entropy < 36:
-        feedback.append("⚠️ Entropy could be higher.")
+        feedback.append("[!] Entropy could be higher.")
     else:
-        feedback.append("✅ Good entropy.")
+        feedback.append("[+] Good entropy.")
     
     # Overall strength assessment
     if score >= 6 and entropy >= 36:
-        feedback.append("🎉 Strong password!")
+        feedback.append("[+] Strong password!")
     elif score >= 4:
-        feedback.append("👍 Medium strength password. Improve further!")
+        feedback.append("[!] Medium strength password. Improve further!")
     else:
-        feedback.append("⚠️ Weak password. Needs improvement.")
+        feedback.append("[!] Weak password. Needs improvement.")
     
     return score, feedback
 
@@ -88,7 +90,8 @@ def check_password_strength(password):
 def main():
     """Main function to run the password checker."""
     print("=== Password Strength Checker ===")
-    password = input("Enter a password to check: ")
+    # getpass so it doesn't end up on screen or in scrollback
+    password = getpass.getpass("Password to check: ")
     
     score, feedback = check_password_strength(password)
     
