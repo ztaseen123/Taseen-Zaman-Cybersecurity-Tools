@@ -1,0 +1,148 @@
+Nov  9 04:00:00 bastion01 CRON[900]: (root) CMD (/usr/local/bin/backup.sh)
+Nov  9 09:20:00 bastion01 sshd[4100]: Accepted publickey for tzaman from 198.51.100.24 port 44943 ssh2: ED25519 SHA256:Zq1o8wJm0T2cVnq4sJ0m7y0b2X9oGk3rJ5QeHk1uT8E
+Nov  9 09:20:01 bastion01 sshd[4100]: pam_unix(sshd:session): session opened for user tzaman(uid=1001) by (uid=0)
+Nov  9 10:25:00 bastion01 sshd[4200]: Accepted publickey for deploy from 198.51.100.31 port 41582 ssh2: RSA SHA256:mO3gq2c5m5cVb0E3n6Qm8fFz1p0yB3yK2k9d1aYt7Lw
+Nov  9 15:03:00 bastion01 sshd[4301]: Failed password for mchen from 198.51.100.40 port 51522 ssh2
+Nov  9 15:03:09 bastion01 sshd[4301]: Accepted password for mchen from 198.51.100.40 port 51522 ssh2
+Nov 10 03:11:02 bastion01 sshd[5000]: Failed password for root from 203.0.113.77 port 32816 ssh2
+Nov 10 03:11:07 bastion01 sshd[5000]: Failed password for root from 203.0.113.77 port 43702 ssh2
+Nov 10 03:11:09 bastion01 sshd[5000]: Failed password for root from 203.0.113.77 port 37886 ssh2
+Nov 10 03:11:11 bastion01 sshd[5000]: Failed password for root from 203.0.113.77 port 48056 ssh2
+Nov 10 03:11:16 bastion01 sshd[5000]: Failed password for root from 203.0.113.77 port 31936 ssh2
+Nov 10 03:11:22 bastion01 sshd[5001]: Failed password for root from 203.0.113.77 port 34056 ssh2
+Nov 10 03:11:23 bastion01 sshd[5000]: error: maximum authentication attempts exceeded for root from 203.0.113.77 port 37315 ssh2 [preauth]
+Nov 10 03:11:23 bastion01 sshd[5000]: Disconnecting authenticating user root 203.0.113.77 port 41022: Too many authentication failures [preauth]
+Nov 10 03:11:28 bastion01 sshd[5001]: Failed password for root from 203.0.113.77 port 32027 ssh2
+Nov 10 03:11:34 bastion01 sshd[5001]: Failed password for root from 203.0.113.77 port 49187 ssh2
+Nov 10 03:11:39 bastion01 sshd[5001]: Failed password for root from 203.0.113.77 port 31624 ssh2
+Nov 10 03:11:42 bastion01 sshd[5001]: Failed password for root from 203.0.113.77 port 31526 ssh2
+Nov 10 03:11:48 bastion01 sshd[5001]: Failed password for root from 203.0.113.77 port 58130 ssh2
+Nov 10 03:11:51 bastion01 sshd[5002]: Failed password for root from 203.0.113.77 port 39489 ssh2
+Nov 10 03:11:52 bastion01 sshd[5001]: error: maximum authentication attempts exceeded for root from 203.0.113.77 port 43734 ssh2 [preauth]
+Nov 10 03:11:52 bastion01 sshd[5001]: Disconnecting authenticating user root 203.0.113.77 port 41022: Too many authentication failures [preauth]
+Nov 10 03:11:54 bastion01 sshd[5002]: Failed password for root from 203.0.113.77 port 47717 ssh2
+Nov 10 03:11:56 bastion01 sshd[5002]: Failed password for root from 203.0.113.77 port 48707 ssh2
+Nov 10 03:12:00 bastion01 sshd[5002]: Failed password for root from 203.0.113.77 port 48358 ssh2
+Nov 10 03:12:03 bastion01 sshd[5002]: Failed password for root from 203.0.113.77 port 33376 ssh2
+Nov 10 03:12:09 bastion01 sshd[5002]: Failed password for root from 203.0.113.77 port 48717 ssh2
+Nov 10 03:12:12 bastion01 sshd[5003]: Failed password for root from 203.0.113.77 port 42202 ssh2
+Nov 10 03:12:13 bastion01 sshd[5002]: error: maximum authentication attempts exceeded for root from 203.0.113.77 port 33192 ssh2 [preauth]
+Nov 10 03:12:13 bastion01 sshd[5002]: Disconnecting authenticating user root 203.0.113.77 port 41022: Too many authentication failures [preauth]
+Nov 10 03:12:18 bastion01 sshd[5003]: Failed password for root from 203.0.113.77 port 53334 ssh2
+Nov 10 03:12:20 bastion01 sshd[5003]: Failed password for root from 203.0.113.77 port 48493 ssh2
+Nov 10 03:12:22 bastion01 sshd[5003]: Failed password for root from 203.0.113.77 port 50283 ssh2
+Nov 10 03:12:25 bastion01 sshd[5003]: Failed password for root from 203.0.113.77 port 46266 ssh2
+Nov 10 03:12:31 bastion01 sshd[5003]: Failed password for root from 203.0.113.77 port 44011 ssh2
+Nov 10 03:12:35 bastion01 sshd[5004]: Failed password for root from 203.0.113.77 port 45256 ssh2
+Nov 10 03:12:36 bastion01 sshd[5003]: error: maximum authentication attempts exceeded for root from 203.0.113.77 port 49187 ssh2 [preauth]
+Nov 10 03:12:36 bastion01 sshd[5003]: Disconnecting authenticating user root 203.0.113.77 port 41022: Too many authentication failures [preauth]
+Nov 10 03:12:40 bastion01 sshd[5004]: Failed password for root from 203.0.113.77 port 41848 ssh2
+Nov 10 03:12:44 bastion01 sshd[5004]: Failed password for root from 203.0.113.77 port 38140 ssh2
+Nov 10 03:12:47 bastion01 sshd[5004]: Failed password for root from 203.0.113.77 port 52904 ssh2
+Nov 10 03:12:50 bastion01 sshd[5004]: Failed password for root from 203.0.113.77 port 32682 ssh2
+Nov 10 03:12:56 bastion01 sshd[5004]: Failed password for root from 203.0.113.77 port 39838 ssh2
+Nov 10 03:13:02 bastion01 sshd[5005]: Failed password for root from 203.0.113.77 port 46223 ssh2
+Nov 10 03:13:03 bastion01 sshd[5004]: error: maximum authentication attempts exceeded for root from 203.0.113.77 port 58676 ssh2 [preauth]
+Nov 10 03:13:03 bastion01 sshd[5004]: Disconnecting authenticating user root 203.0.113.77 port 41022: Too many authentication failures [preauth]
+Nov 10 03:13:06 bastion01 sshd[5005]: Failed password for root from 203.0.113.77 port 53902 ssh2
+Nov 10 03:13:11 bastion01 sshd[5005]: Failed password for root from 203.0.113.77 port 39435 ssh2
+Nov 10 03:13:17 bastion01 sshd[5005]: Failed password for root from 203.0.113.77 port 32398 ssh2
+Nov 10 03:13:19 bastion01 sshd[5005]: Failed password for root from 203.0.113.77 port 46775 ssh2
+Nov 10 03:13:24 bastion01 sshd[5005]: Failed password for root from 203.0.113.77 port 35405 ssh2
+Nov 10 03:13:28 bastion01 sshd[5006]: Failed password for root from 203.0.113.77 port 34980 ssh2
+Nov 10 03:13:29 bastion01 sshd[5005]: error: maximum authentication attempts exceeded for root from 203.0.113.77 port 46022 ssh2 [preauth]
+Nov 10 03:13:29 bastion01 sshd[5005]: Disconnecting authenticating user root 203.0.113.77 port 41022: Too many authentication failures [preauth]
+Nov 10 03:13:33 bastion01 sshd[5006]: Failed password for root from 203.0.113.77 port 31284 ssh2
+Nov 10 03:13:35 bastion01 sshd[5006]: Failed password for root from 203.0.113.77 port 55053 ssh2
+Nov 10 03:13:41 bastion01 sshd[5006]: Failed password for root from 203.0.113.77 port 48776 ssh2
+Nov 10 03:13:45 bastion01 sshd[5006]: Failed password for root from 203.0.113.77 port 41145 ssh2
+Nov 10 03:13:49 bastion01 sshd[5006]: Failed password for root from 203.0.113.77 port 49476 ssh2
+Nov 10 03:13:54 bastion01 sshd[5007]: Failed password for root from 203.0.113.77 port 49002 ssh2
+Nov 10 03:13:55 bastion01 sshd[5006]: error: maximum authentication attempts exceeded for root from 203.0.113.77 port 56112 ssh2 [preauth]
+Nov 10 03:13:55 bastion01 sshd[5006]: Disconnecting authenticating user root 203.0.113.77 port 41022: Too many authentication failures [preauth]
+Nov 10 03:13:59 bastion01 sshd[5007]: Failed password for root from 203.0.113.77 port 32253 ssh2
+Nov 10 03:14:01 bastion01 sshd[5007]: Failed password for root from 203.0.113.77 port 38845 ssh2
+Nov 10 03:14:06 bastion01 sshd[5007]: Failed password for root from 203.0.113.77 port 52840 ssh2
+Nov 10 03:14:08 bastion01 sshd[5007]: Failed password for root from 203.0.113.77 port 31988 ssh2
+Nov 10 03:14:12 bastion01 sshd[5007]: message repeated 2 times: [ Failed password for root from 203.0.113.77 port 48812 ssh2]
+Nov 10 03:14:19 bastion01 sshd[5020]: Accepted password for root from 203.0.113.77 port 49920 ssh2
+Nov 10 03:14:20 bastion01 sshd[5020]: pam_unix(sshd:session): session opened for user root(uid=0) by (uid=0)
+Nov 10 04:00:00 bastion01 CRON[901]: (root) CMD (/usr/local/bin/backup.sh)
+Nov 10 09:04:00 bastion01 sshd[4101]: Accepted publickey for tzaman from 198.51.100.24 port 57559 ssh2: ED25519 SHA256:Zq1o8wJm0T2cVnq4sJ0m7y0b2X9oGk3rJ5QeHk1uT8E
+Nov 10 09:04:01 bastion01 sshd[4101]: pam_unix(sshd:session): session opened for user tzaman(uid=1001) by (uid=0)
+Nov 10 10:06:00 bastion01 sshd[4201]: Accepted publickey for deploy from 198.51.100.31 port 51982 ssh2: RSA SHA256:mO3gq2c5m5cVb0E3n6Qm8fFz1p0yB3yK2k9d1aYt7Lw
+Nov 10 20:40:08 bastion01 sshd[6001]: Invalid user admin from 192.0.2.146 port 52986
+Nov 10 20:40:10 bastion01 sshd[6001]: Failed password for invalid user admin from 192.0.2.146 port 52986 ssh2
+Nov 10 20:40:10 bastion01 sshd[6001]: Connection closed by invalid user admin 192.0.2.146 port 52986 [preauth]
+Nov 10 20:40:13 bastion01 sshd[6002]: Invalid user test from 192.0.2.146 port 51205
+Nov 10 20:40:15 bastion01 sshd[6002]: Failed password for invalid user test from 192.0.2.146 port 51205 ssh2
+Nov 10 20:40:15 bastion01 sshd[6002]: Connection closed by invalid user test 192.0.2.146 port 51205 [preauth]
+Nov 10 20:40:20 bastion01 sshd[6003]: Invalid user oracle from 192.0.2.146 port 52322
+Nov 10 20:40:22 bastion01 sshd[6003]: Failed password for invalid user oracle from 192.0.2.146 port 52322 ssh2
+Nov 10 20:40:22 bastion01 sshd[6003]: Connection closed by invalid user oracle 192.0.2.146 port 52322 [preauth]
+Nov 10 20:40:29 bastion01 sshd[6004]: Invalid user postgres from 192.0.2.146 port 44602
+Nov 10 20:40:31 bastion01 sshd[6004]: Failed password for invalid user postgres from 192.0.2.146 port 44602 ssh2
+Nov 10 20:40:31 bastion01 sshd[6004]: Connection closed by invalid user postgres 192.0.2.146 port 44602 [preauth]
+Nov 10 20:40:34 bastion01 sshd[6005]: Invalid user ubuntu from 192.0.2.146 port 53482
+Nov 10 20:40:36 bastion01 sshd[6005]: Failed password for invalid user ubuntu from 192.0.2.146 port 53482 ssh2
+Nov 10 20:40:36 bastion01 sshd[6005]: Connection closed by invalid user ubuntu 192.0.2.146 port 53482 [preauth]
+Nov 10 20:40:40 bastion01 sshd[6006]: Invalid user git from 192.0.2.146 port 59066
+Nov 10 20:40:42 bastion01 sshd[6006]: Failed password for invalid user git from 192.0.2.146 port 59066 ssh2
+Nov 10 20:40:42 bastion01 sshd[6006]: Connection closed by invalid user git 192.0.2.146 port 59066 [preauth]
+Nov 10 20:40:48 bastion01 sshd[6007]: Invalid user jenkins from 192.0.2.146 port 41370
+Nov 10 20:40:50 bastion01 sshd[6007]: Failed password for invalid user jenkins from 192.0.2.146 port 41370 ssh2
+Nov 10 20:40:50 bastion01 sshd[6007]: Connection closed by invalid user jenkins 192.0.2.146 port 41370 [preauth]
+Nov 10 20:40:51 bastion01 sshd[6008]: Invalid user ftpuser from 192.0.2.146 port 45128
+Nov 10 20:40:53 bastion01 sshd[6008]: Failed password for invalid user ftpuser from 192.0.2.146 port 45128 ssh2
+Nov 10 20:40:53 bastion01 sshd[6008]: Connection closed by invalid user ftpuser 192.0.2.146 port 45128 [preauth]
+Nov 10 20:40:56 bastion01 sshd[6009]: Invalid user guest from 192.0.2.146 port 35506
+Nov 10 20:40:58 bastion01 sshd[6009]: Failed password for invalid user guest from 192.0.2.146 port 35506 ssh2
+Nov 10 20:40:58 bastion01 sshd[6009]: Connection closed by invalid user guest 192.0.2.146 port 35506 [preauth]
+Nov 10 20:41:03 bastion01 sshd[6010]: Invalid user nagios from 192.0.2.146 port 33836
+Nov 10 20:41:05 bastion01 sshd[6010]: Failed password for invalid user nagios from 192.0.2.146 port 33836 ssh2
+Nov 10 20:41:05 bastion01 sshd[6010]: Connection closed by invalid user nagios 192.0.2.146 port 33836 [preauth]
+Nov 10 20:41:09 bastion01 sshd[6011]: Invalid user pi from 192.0.2.146 port 31931
+Nov 10 20:41:11 bastion01 sshd[6011]: Failed password for invalid user pi from 192.0.2.146 port 31931 ssh2
+Nov 10 20:41:11 bastion01 sshd[6011]: Connection closed by invalid user pi 192.0.2.146 port 31931 [preauth]
+Nov 10 20:41:13 bastion01 sshd[6012]: Invalid user user1 from 192.0.2.146 port 55173
+Nov 10 20:41:15 bastion01 sshd[6012]: Failed password for invalid user user1 from 192.0.2.146 port 55173 ssh2
+Nov 10 20:41:15 bastion01 sshd[6012]: Connection closed by invalid user user1 192.0.2.146 port 55173 [preauth]
+Nov 10 20:41:18 bastion01 sshd[6013]: Invalid user support from 192.0.2.146 port 34238
+Nov 10 20:41:20 bastion01 sshd[6013]: Failed password for invalid user support from 192.0.2.146 port 34238 ssh2
+Nov 10 20:41:20 bastion01 sshd[6013]: Connection closed by invalid user support 192.0.2.146 port 34238 [preauth]
+Nov 10 20:41:26 bastion01 sshd[6014]: Invalid user backup from 192.0.2.146 port 38113
+Nov 10 20:41:28 bastion01 sshd[6014]: Failed password for invalid user backup from 192.0.2.146 port 38113 ssh2
+Nov 10 20:41:28 bastion01 sshd[6014]: Connection closed by invalid user backup 192.0.2.146 port 38113 [preauth]
+Nov 10 20:41:32 bastion01 sshd[6015]: Invalid user www from 192.0.2.146 port 42810
+Nov 10 20:41:34 bastion01 sshd[6015]: Failed password for invalid user www from 192.0.2.146 port 42810 ssh2
+Nov 10 20:41:34 bastion01 sshd[6015]: Connection closed by invalid user www 192.0.2.146 port 42810 [preauth]
+Nov 11 05:02:04 web02 sshd-session[7001]: Connection closed by authenticating user root 203.0.113.200 port 32640 [preauth]
+Nov 11 05:02:06 web02 sshd-session[7002]: Connection closed by authenticating user root 203.0.113.200 port 44718 [preauth]
+Nov 11 05:02:10 web02 sshd-session[7003]: Connection closed by authenticating user root 203.0.113.200 port 48004 [preauth]
+Nov 11 05:02:13 web02 sshd-session[7004]: Connection closed by authenticating user root 203.0.113.200 port 58946 [preauth]
+Nov 11 05:02:15 web02 sshd-session[7005]: Connection closed by authenticating user root 203.0.113.200 port 56846 [preauth]
+Nov 11 05:02:19 web02 sshd-session[7006]: Connection closed by authenticating user root 203.0.113.200 port 58311 [preauth]
+Nov 11 05:02:22 web02 sshd-session[7007]: Connection closed by authenticating user root 203.0.113.200 port 53147 [preauth]
+Nov 11 05:02:26 web02 sshd-session[7008]: Connection closed by authenticating user root 203.0.113.200 port 41756 [preauth]
+Nov 11 05:02:30 web02 sshd-session[7009]: Connection closed by authenticating user root 203.0.113.200 port 37561 [preauth]
+Nov 11 05:02:32 web02 sshd-session[7010]: Connection closed by authenticating user root 203.0.113.200 port 32719 [preauth]
+Nov 11 05:02:34 web02 sshd-session[7011]: Connection closed by authenticating user root 203.0.113.200 port 34957 [preauth]
+Nov 11 05:02:36 web02 sshd-session[7012]: Connection closed by authenticating user root 203.0.113.200 port 51578 [preauth]
+Nov 11 05:02:38 web02 sshd-session[7013]: Connection closed by authenticating user root 203.0.113.200 port 30395 [preauth]
+Nov 11 05:02:42 web02 sshd-session[7014]: Connection closed by authenticating user root 203.0.113.200 port 57233 [preauth]
+Nov 11 09:37:00 bastion01 sshd[4102]: Accepted publickey for tzaman from 198.51.100.24 port 41900 ssh2: ED25519 SHA256:Zq1o8wJm0T2cVnq4sJ0m7y0b2X9oGk3rJ5QeHk1uT8E
+Nov 11 09:37:01 bastion01 sshd[4102]: pam_unix(sshd:session): session opened for user tzaman(uid=1001) by (uid=0)
+Nov 11 10:32:00 bastion01 sshd[4202]: Accepted publickey for deploy from 198.51.100.31 port 47035 ssh2: RSA SHA256:mO3gq2c5m5cVb0E3n6Qm8fFz1p0yB3yK2k9d1aYt7Lw
+Nov 11 12:30:28 bastion01 sshd[8001]: Failed password for deploy from 198.18.93.68 port 39238 ssh2
+Nov 11 12:30:38 bastion01 sshd[8002]: Failed password for deploy from 198.18.74.108 port 47517 ssh2
+Nov 11 12:30:59 bastion01 sshd[8003]: Failed password for deploy from 198.18.163.244 port 34112 ssh2
+Nov 11 12:31:25 bastion01 sshd[8004]: Failed password for deploy from 198.18.27.117 port 59475 ssh2
+Nov 11 12:31:52 bastion01 sshd[8005]: Failed password for deploy from 198.18.200.102 port 43073 ssh2
+Nov 11 12:32:14 bastion01 sshd[8006]: Failed password for deploy from 198.18.53.124 port 50784 ssh2
+Nov 11 12:32:36 bastion01 sshd[8007]: Failed password for deploy from 198.18.31.49 port 32206 ssh2
+Nov 11 12:32:52 bastion01 sshd[8008]: Failed password for deploy from 198.18.225.42 port 33602 ssh2
+Nov 11 12:33:12 bastion01 sshd[8009]: Failed password for deploy from 198.18.26.27 port 30007 ssh2
+Nov 11 12:33:40 bastion01 sshd[8010]: Failed password for deploy from 198.18.77.138 port 33324 ssh2
+Nov 11 12:34:01 bastion01 sshd[8011]: Failed password for deploy from 198.18.13.19 port 58650 ssh2
+Nov 11 12:34:17 bastion01 sshd[8012]: Failed password for deploy from 198.18.192.39 port 50788 ssh2
+Nov 11 14:00:00 bastion01 sshd[8100]: Failed password for invalid user x from 198.51.100.24 port 22 ssh2 from 203.0.113.9 port 40122 ssh2

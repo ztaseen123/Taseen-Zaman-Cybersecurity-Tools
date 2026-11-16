@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+triage-*/
+triage-*.tar.gz
+*.csv
+baseline*.json
+.venv/
