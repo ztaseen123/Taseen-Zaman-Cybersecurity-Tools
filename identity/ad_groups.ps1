@@ -1,4 +1,4 @@
-# AD group queries I keep reaching for. Needs the ActiveDirectory module (RSAT).
+# Common AD group queries. Needs the ActiveDirectory module (RSAT).
 # These are one-liners to paste, not a script to run top to bottom.
 # Swap 'HR' and the OU path for whatever you're actually looking at.
 

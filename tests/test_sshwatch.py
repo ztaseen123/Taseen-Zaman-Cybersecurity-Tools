@@ -1,9 +1,10 @@
+import argparse
 import os
 import sys
 import tempfile
 import unittest
 from collections import Counter
-from datetime import datetime
+from datetime import datetime, timedelta as td
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "..", "detection"))
@@ -64,7 +65,6 @@ class Parsing(unittest.TestCase):
 class Detection(unittest.TestCase):
     def run_sample(self, *extra):
         events = sorted(sshwatch.parse([SAMPLE], Counter(), now=NOW), key=lambda e: e.ts)
-        import argparse
         opts = argparse.Namespace(window=10, lookback=60, threshold=10, spray_users=8,
                                   success_after=5, distributed=10, allow=[])
         for a in extra:
@@ -86,7 +86,6 @@ class Detection(unittest.TestCase):
         self.assertNotIn("203.0.113.77", srcs)
 
     def test_busiest(self):
-        from datetime import timedelta as td
         t0 = datetime(2026, 1, 1)
         times = [t0, t0 + td(minutes=1), t0 + td(minutes=30), t0 + td(minutes=31), t0 + td(minutes=32)]
         self.assertEqual(sshwatch.busiest(times, td(minutes=10)), 3)
